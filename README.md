@@ -1,6 +1,6 @@
 # Sound Docs
 
-It all began with a swing of a CPU clock.
+CPU swings.
 
 ## Repos:
 
