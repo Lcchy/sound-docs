@@ -27,6 +27,17 @@ Old:
 - Audio visual source location and separation model: https://github.com/Lcchy/AVSep_NET
 - DDSP sound synthetizer: https://github.com/Lcchy/DDSP
 
+## Orac/Mec dev flow:
+
+- Connect via ssh to fates
+- (Git pull Mec on it + build (see mec docs))
+- ```
+  sudo systemctl stop sidekick
+  cd sidekick
+  /usr/local/sidekick/sidekick
+  ```
+- Launch Orac_dev from Fates hw
+
 ## Mappings:
 
 Note: Midi Channel 0 is OMNI
@@ -53,11 +64,18 @@ Note: Midi Channel 0 is OMNI
 
     - Kontrol (Creation, only used by Orac internally): r 6000 - s 6001
     - Nui OSC device ([source](https://github.com/Lcchy/MEC-private/blob/d872dcad8c574281ecfb098f9e593040da49c1e1/mec-api/devices/mec_nui.cpp#L503)): r 6100 - s 6101
+    - TODO add pd osc control interface
 
   - Sidekick (see NuiLite for source): s 3000 and r 3001
   - Arc (see [doc](https://monome.org/docs/serialosc/osc/)):
   - Grid: ?
 
 ## Fates Orac/MEC Arch:
+
+- TODO: GO through fates_deploy
+  - a2jmidi
+  - Jack routing (w/o digi)
+  - describe running services
+  - Integrate Notes.md
 
 ![](fates_arch.svg)
