@@ -64,18 +64,80 @@ Note: Midi Channel 0 is OMNI
 
     - Kontrol (Creation, only used by Orac internally): r 6000 - s 6001
     - Nui OSC device ([source](https://github.com/Lcchy/MEC-private/blob/d872dcad8c574281ecfb098f9e593040da49c1e1/mec-api/devices/mec_nui.cpp#L503)): r 6100 - s 6101
-    - TODO add pd osc control interface
+    - Osc control interface device ([source](https://github.com/Lcchy/MEC_private/blob/ec310f15ff9f2f111efe796854457c43dc72ac80/mec-api/devices/mec_oscdisplay.cpp#L1442) - used for OracRemoteControl.pd, found [here](https://github.com/Lcchy/pd-stuff)): r 6100, s 6101
 
-  - Sidekick (see NuiLite for source): s 3000 and r 3001
+  - Sidekick ([source](https://github.com/Lcchy/NuiLite-private)): s 3000 and r 3001
   - Arc (see [doc](https://monome.org/docs/serialosc/osc/)):
   - Grid: ?
 
 ## Fates Orac/MEC Arch:
 
-- TODO: GO through fates_deploy
-  - a2jmidi
-  - Jack routing (w/o digi)
-  - describe running services
+- Services:
+
+  - There are 2 possible jack servers: runnning in `norns-jack.service` (on fates hw) or `digitakt-jack.service` (via overwitch-cli)
+  - Spotify deamon running with `librespot`
+  - Jack connections are managed via `jack-plumbing`
+  - Orac can run with `orac` or `orac-jack` depending on the presence of a jack server
+  - Usb mic connects via alsa_in in `usb-mic-jack`
+
   - Integrate Notes.md
+  - Explain sidekick patches etc
+
+## Jack routing:
+
+(see .jack_plumbing)
+
+```
+; Eyesy connections
+
+(connect "crone:output_1" "eyesy:input_1")
+(connect "crone:output_2" "eyesy:input_2")
+
+(connect "pure_data:output0" "eyesy:input_1")
+(connect "pure_data:output1" "eyesy:input_2")
+
+(connect "cpal_client_out:out_0" "eyesy:input_1")
+(connect "cpal_client_out:out_1" "eyesy:input_2")
+
+(connect "alsa_in:capture_1" "eyesy:input_1")
+(connect "alsa_in:capture_2" "eyesy:input_2")
+
+; Digitakt - Stereo
+
+; (connect "alsa_in:capture_1" "system:playback_1")
+; (connect "alsa_in:capture_2" "system:playback_2")
+
+(connect "alsa_in:capture_1" "pure_data:input0")
+(connect "alsa_in:capture_2" "pure_data:input1")
+
+(connect "alsa_in:capture_1" "crone:input_1")
+(connect "alsa_in:capture_2" "crone:input_2")
+
+(connect "crone:output_1" "alsa_out:playback_1")
+(connect "crone:output_2" "alsa_out:playback_2")
+
+(connect "pure_data:output0" "alsa_out:playback_1")
+(connect "pure_data:output1" "alsa_out:playback_2")
+
+; Digitakt - Multitrack - paralell_dig_mult router
+
+(connect "cpal_client_out:out_0" "Digitakt:Main L Input")
+(connect "cpal_client_out:out_1" "Digitakt:Main R Input")
+
+(connect "Digitakt:Main L" "pure_data:input2")
+(connect "Digitakt:Main R" "pure_data:input3")
+
+(connect "Digitakt:Track 6" "pure_data:input4")
+(connect "Digitakt:Track 7" "pure_data:input5")
+(connect "Digitakt:Track 8" "pure_data:input6")
+
+(connect "pure_data:output0" "Digitakt:Main L Input")
+(connect "pure_data:output1" "Digitakt:Main R Input")
+
+; MIDI
+
+(connect "a2j:Faderfox EC4 \[._\] \(capture\): \[0\] Faderfox EC4 MIDI 1" "a2j:Pure Data \[._\] \(playback\): \[0\] Pure Data Midi-In 1")
+(connect "Digitakt:MIDI out" "a2j:Pure Data \[.\*\] \(playback\): \[0\] Pure Data Midi-In 1")
+```
 
 ![](fates_arch.svg)
