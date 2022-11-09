@@ -72,7 +72,7 @@ Note: Midi Channel 0 is OMNI
 
 ## Fates Orac/MEC Arch:
 
-- Services:
+- Services (see fates-deploy):
 
   - There are 2 possible jack servers: runnning in `norns-jack.service` (on fates hw) or `digitakt-jack.service` (via overwitch-cli)
   - Spotify deamon running with `librespot`
