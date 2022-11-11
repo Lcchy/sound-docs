@@ -73,7 +73,8 @@ Note: Midi Channel 0 is OMNI
     - Osc control interface device ([source](https://github.com/Lcchy/MEC_private/blob/ec310f15ff9f2f111efe796854457c43dc72ac80/mec-api/devices/mec_oscdisplay.cpp#L1442) - used for OracRemoteControl.pd, found [here](https://github.com/Lcchy/pd-stuff)): r 6100, s 6101
 
   - Sidekick ([source](https://github.com/Lcchy/NuiLite-private)): s 3000 and r 3001
-  - Arc (see [doc](https://monome.org/docs/serialosc/osc/)):
+  - Arc (see [doc](https://monome.org/docs/serialosc/osc/)): 13152 device port, 12002 for serialosc - destination set to 6100
+  - Gisele : send on 34254
   - Grid: ?
 
 ## Fates Orac/MEC Arch:
