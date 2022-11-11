@@ -38,6 +38,12 @@ Old:
   ```
 - Launch Orac_dev from Fates hw
 
+## Norns:
+
+- Manage scripts with maiden (disable vpn): https://monome.org/docs/norns/maiden/
+
+![](./norns_sound_arch.png)
+
 ## Mappings:
 
 Note: Midi Channel 0 is OMNI
@@ -80,6 +86,7 @@ Note: Midi Channel 0 is OMNI
   - Orac can run with `orac` or `orac-jack` depending on the presence of a jack server
   - Usb mic connects via alsa_in in `usb-mic-jack`
 
+  - Arc: always runs on port 13152, serialosc stores dest port, so just set `/usr/local/bin/sendosc 127.0.0.1 13152 /sys/port i 6100` once
   - Integrate Notes.md
   - Explain sidekick patches etc
 
