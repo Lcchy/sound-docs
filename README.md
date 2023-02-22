@@ -55,12 +55,13 @@ Note: Midi Channel 0 is OMNI
 
     - Chains: 1,2,3
     - Clock: In 1 - Out 1
-    - Active module: 0-16 ?? TODO Check with Aux: 1 CC 69
+    - Active module: 0 or 16 ?? TODO Check with Aux: Ch 16 CC 69
     - Router EC4 control ([source](https://github.com/Lcchy/orac-modules/blob/main/fates_usermodules/router/aapart/parallel_dig_mult/module.pd)): 10 (CC 0 to 7)
     - Nui osc dev map ([source](https://github.com/Lcchy/orac-modules/blob/main/fates_usermodules/router/aapart/parallel_dig_mult/module.pd)): Ch 11
       - NRPN CC 98 99, 6 38 - Ids 00-Params#
       - ModuleSelect-PageSelect: CC 0-1
 
+  - FH2: Ch 12, see config and notes
   - QuNexus LEDs: 1?
 
 - OSC UDP ports:
@@ -74,7 +75,7 @@ Note: Midi Channel 0 is OMNI
 
   - Sidekick ([source](https://github.com/Lcchy/NuiLite-private)): s 3000 and r 3001
   - Arc (see [doc](https://monome.org/docs/serialosc/osc/)): 13152 device port, 12002 for serialosc - destination set to 6100
-  - Gisele : send on 34254
+  - Gisele : receive on 34254
   - Grid: ?
 
 ## Fates Orac/MEC Arch:
